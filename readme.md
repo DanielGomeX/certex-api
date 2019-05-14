@@ -4,11 +4,11 @@ Certex API is an API to Certex software, certex is an android app to manage exti
 
 ## We are using
 
-- [PHP](https://php.net/).
-- [Laravel Framework](https://laravel.com/).
-- [JWT Auth (REST API)](https://github.com/tymondesigns/jwt-auth).
-- [PostgreSQL](https://www.postgresql.org/).
-- [Workbench (To modeling database)](https://www.mysql.com/products/workbench/).
+- [PHP](https://php.net/)
+- [Laravel Framework](https://laravel.com/)
+- [JWT Auth (REST API)](https://github.com/tymondesigns/jwt-auth)
+- [PostgreSQL](https://www.postgresql.org/)
+- [Workbench (To modeling database)](https://www.mysql.com/products/workbench/)
 
 ## We are learning with this project
 
@@ -23,4 +23,4 @@ Certex API is an API to Certex software, certex is an android app to manage exti
 
 ## License
 
-[MIT license](https://opensource.org/licenses/MIT).
+[MIT license](https://opensource.org/licenses/MIT)
