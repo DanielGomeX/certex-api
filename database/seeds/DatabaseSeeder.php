@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CompaniesTableSeeder::class);
         $this->call(AccessLevelsTableSeeder::class);
         $this->call(UsersTableSeeder::class);
+        $this->call(ExtinguishersTypesTableSeeder::class);
     }
 }
