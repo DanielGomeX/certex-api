@@ -23,9 +23,25 @@ class UsersTableSeeder extends Seeder
                 'password' => $password,
                 'companies_id' => 1,
                 'access_levels_id' => 1
-            ]
+            ],
+            [
+                'id' => 2,
+                'name' => 'Jackson Wilbuch',
+                'email' => 'jackson@certex.com',
+                'password' => $password,
+                'companies_id' => 1,
+                'access_levels_id' => 1
+            ],
+            [
+                'id' => 3,
+                'name' => 'Anderson Caye',
+                'email' => 'anderson@certex.com',
+                'password' => $password,
+                'companies_id' => 1,
+                'access_levels_id' => 1
+            ],
         ]);
 
-        DB::statement("ALTER SEQUENCE users_id_seq RESTART WITH 2");
+        DB::statement("ALTER SEQUENCE users_id_seq RESTART WITH 4");
     }
 }
