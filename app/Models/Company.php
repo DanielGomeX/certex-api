@@ -19,4 +19,9 @@ class Company extends Model
         'signature',
         'cities_id'
     ];
+
+    public function users()
+    {
+        return $this->hasMany(User::class, 'companies_id', 'id');
+    }
 }
