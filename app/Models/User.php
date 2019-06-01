@@ -58,4 +58,16 @@ class User extends Authenticatable implements JWTSubject
    {
        return [];
    }
+
+    /** Relations **/
+
+    public function userResponsibility()
+    {
+        return $this->hasMany(userResponsibility::class, 'responsibilities_id', 'id');
+    }
+
+    public function certification()
+    {
+        return $this->belongsTo(Certification::class, 'users_id', 'id');
+    }
 }

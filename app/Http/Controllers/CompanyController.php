@@ -92,10 +92,6 @@ class CompanyController extends Controller
 
     public function destroy($id)
     {
-        dd(1);
-
-        // 177.44.248.19
-
         if (!$id) {
             return APIHelper::reponse(500, ['Not id specified']);
         }
@@ -105,7 +101,18 @@ class CompanyController extends Controller
         if ($company) {
             DB::beginTransaction();
             try {
+
+                //Delete all users responsibility
+                $company->users()->userResponsibility()->delete();
+
+                //Delete the user's certifications
+                $company->users()->certification()->delete();
+
+                //Delete all users related with that company
+                $company->users()->delete();
+
                 $company->delete();
+
                 DB::commit();
             } catch(\Exception $e) {
                 DB::rollback();
