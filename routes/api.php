@@ -26,6 +26,8 @@ Route::get('about', function(){
     dd('error trated');
 });
 
+Route::get('cep/{cep}', 'CepController@cep');
+
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
