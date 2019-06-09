@@ -22,10 +22,10 @@ class CreateExtinguishersTable extends Migration
             $table->datetime('charge_date');
             $table->datetime('validate_date');
             $table->text('location');
-            $table->unsignedInteger('manufactures_id');
+            $table->unsignedInteger('manufacturers_id');
             $table->unsignedInteger('extinguishers_status_id');
             $table->unsignedInteger('companies_id');
-            $table->foreign('manufactures_id')->references('id')->on('manufactures');
+            $table->foreign('manufacturers_id')->references('id')->on('manufacturers');
             $table->foreign('extinguishers_status_id')->references('id')->on('extinguishers_status');
             $table->foreign('companies_id')->references('id')->on('companies');
             $table->timestamps();

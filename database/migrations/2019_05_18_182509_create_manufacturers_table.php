@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateManufacturesTable extends Migration
+class CreateManufacturersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class CreateManufacturesTable extends Migration
      */
     public function up()
     {
-        Schema::create('manufactures', function (Blueprint $table) {
+        Schema::create('manufacturers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('description', 45);
+            $table->string('name', 50);
+            $table->string('fone', 50);
+            $table->string('email', 50)->unique();
+            $table->string('description', 45)->nullable();
             $table->unsignedInteger('cities_id');
             $table->foreign('cities_id')->references('id')->on('cities');
             $table->timestamps();
@@ -29,6 +32,6 @@ class CreateManufacturesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('manufactures');
+        Schema::dropIfExists('manufacturers');
     }
 }

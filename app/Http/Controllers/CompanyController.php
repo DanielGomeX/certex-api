@@ -10,13 +10,6 @@ use Validator;
 
 class CompanyController extends Controller
 {
-    public function index()
-    {
-
-
-        return 'chegou aqui';
-    }
-
     public function show(Request $request, $id)
     {
         $inputs = $request->all();
@@ -32,9 +25,7 @@ class CompanyController extends Controller
 
         $company = Company::where('id', $inputs['id'])->first();
 
-        if ($company) {
-            return APIHelper::response(200, ['OK'], ['company' => $company]);
-        }
+        return APIHelper::response(200, ['OK'], ['company' => $company]);
     }
 
     public function store(Request $request)
@@ -88,38 +79,5 @@ class CompanyController extends Controller
         }
 
         return APIHelper::response(200, ['OK'], ['company' => $company]);
-    }
-
-    public function destroy($id)
-    {
-        if (!$id) {
-            return APIHelper::reponse(500, ['Not id specified']);
-        }
-
-        $company = Company::find($id);
-
-        if ($company) {
-            DB::beginTransaction();
-            try {
-
-                //Delete all users responsibility
-                $company->users()->userResponsibility()->delete();
-
-                //Delete the user's certifications
-                $company->users()->certification()->delete();
-
-                //Delete all users related with that company
-                $company->users()->delete();
-
-                $company->delete();
-
-                DB::commit();
-            } catch(\Exception $e) {
-                DB::rollback();
-                return APIHelper::response(500, [$e->getMessage()]);
-            }
-        }
-
-        return APIHelper::response(200, ['OK']);
     }
 }
