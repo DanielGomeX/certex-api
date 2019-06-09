@@ -25,9 +25,7 @@ class CompanyController extends Controller
 
         $company = Company::where('id', $inputs['id'])->first();
 
-        if ($company) {
-            return APIHelper::response(200, ['OK'], ['company' => $company]);
-        }
+        return APIHelper::response(200, ['OK'], ['company' => $company]);
     }
 
     public function store(Request $request)
