@@ -3,11 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Extinguisher;
 use App\Models\ExtinguisherType;
+use App\Helpers\APIHelper;
+use Validator;
 
 class ExtinguishersController extends Controller
 {
+    private $extinguisherModel;
+
+    public function __construct(Extinguisher $extinguisher)
+    {
+        $this->extinguisherModel = $extinguisher;
+    }
+
     public function index(Request $request, $skip, $take)
     {
         $inputs = $request->all();
@@ -16,7 +26,7 @@ class ExtinguishersController extends Controller
             return APIHelper::response(500, ['The parameters ini and end is a valid numeric']);
         }
 
-        $extinguishers = Extinguisher::skip($skip)
+        $extinguishers = $this->extinguisherModel->skip($skip)
                                         ->take($take)
                                         ->get();
 
@@ -36,7 +46,7 @@ class ExtinguishersController extends Controller
             return APIHelper::response(500, $validator->errors());
         }
 
-        $extinguisher = Extinguisher::with('extinguishersTypes')
+        $extinguisher = $this->extinguisherModel->with('extinguishersTypes')
                                     ->where('id', $inputs['id'])->first();
 
         return APIHelper::response(200, ['OK'], ['extinguisher' => $extinguisher]);
@@ -56,13 +66,13 @@ class ExtinguishersController extends Controller
             return APIHelper::response(500, $validator->errors());
         }
 
-        $extinguishersTypes = $inputs['extinguishers_types'];
+        $extinguishersTypes = json_decode($inputs['extinguishers_types']);
 
         $inputs = array_diff($inputs, ['extinguishers_types']);
 
         DB::beginTransaction();
         try {
-            $extinguisher = Extinguisher::create($inputs);
+            $extinguisher = $this->extinguisherModel->create($inputs);
 
             Extinguisher::insertExtinguishersTypes($extinguisher->id, $extinguishersTypes);
 
@@ -73,7 +83,7 @@ class ExtinguishersController extends Controller
         }
 
         if ($extinguisher) {
-            return APIHelper::response(200, ['OK'], ['extinguisher' => $extinguisher]);
+            return APIHelper::response(200, ['OK'], ['extinguisher' => $extinguisher->load('extinguishersExtinguishersTypes')]);
         }
     }
 
@@ -85,17 +95,16 @@ class ExtinguishersController extends Controller
             return APIHelper::reponse(500, ['Not id specified']);
         }
 
-        $extinguisher = Extinguisher::find($id)->with('extinguishersTypes');
+        $extinguisher = $this->extinguisherModel->load('extinguishersExtinguishersTypes')->find($id);
 
-        $extinguishersTypes = $inputs['extinguishers_types'];
+        $extinguishersTypes = json_decode($inputs['extinguishers_types']);
 
         $inputs = array_diff($inputs, ['extinguishers_types']);
 
         if ($extinguisher) {
             DB::beginTransaction();
             try {
-
-                $extinguisher->extinguishersTypes()->delete();
+                $extinguisher->extinguishersExtinguishersTypes()->delete();
 
                 Extinguisher::insertExtinguishersTypes($extinguisher->id, $extinguishersTypes);
 
@@ -107,7 +116,7 @@ class ExtinguishersController extends Controller
             }
         }
 
-        return APIHelper::response(200, ['OK'], ['extinguisher' => $extinguisher]);
+        return APIHelper::response(200, ['OK'], ['extinguisher' => $extinguisher->load('extinguishersExtinguishersTypes')]);
     }
 
     public function destroy(Request $request, $id)
@@ -116,13 +125,12 @@ class ExtinguishersController extends Controller
             return APIHelper::reponse(500, ['Not id specified']);
         }
 
-        $extinguisher = Extinguisher::find($id)->with('extinguishersTypes');
-
+        $extinguisher = $this->extinguisherModel->load('extinguishersExtinguishersTypes')->find($id);
 
         if ($extinguisher) {
             DB::beginTransaction();
             try {
-                $extinguisher->extinguishersTypes()->delete();
+                $extinguisher->extinguishersExtinguishersTypes()->delete();
                 $extinguisher->delete();
                 DB::commit();
             } catch(\Exception $e) {

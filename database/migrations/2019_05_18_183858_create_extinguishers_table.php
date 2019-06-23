@@ -15,13 +15,13 @@ class CreateExtinguishersTable extends Migration
     {
         Schema::create('extinguishers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('code', 50);
-            $table->string('numeration', 50);
-            $table->string('capacity', 50);
-            $table->string('charge', 50);
-            $table->datetime('charge_date');
-            $table->datetime('validate_date');
-            $table->text('location');
+            $table->string('code', 50)->nullable();
+            $table->string('numeration', 50)->nullable();
+            $table->string('capacity', 50)->nullable();
+            $table->string('charge', 50)->nullable();
+            $table->datetime('charge_date')->nullable();
+            $table->datetime('validate_date')->nullable();
+            $table->text('location')->nullable();
             $table->unsignedInteger('manufacturers_id');
             $table->unsignedInteger('companies_id');
             $table->foreign('manufacturers_id')->references('id')->on('manufacturers');
