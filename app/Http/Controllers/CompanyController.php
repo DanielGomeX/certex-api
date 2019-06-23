@@ -10,6 +10,13 @@ use Validator;
 
 class CompanyController extends Controller
 {
+    private $companyModel;
+
+    public function __construct(Company $company)
+    {
+        $this->companyModel = $company;
+    }
+
     public function show(Request $request, $id)
     {
         $inputs = $request->all();
@@ -23,7 +30,7 @@ class CompanyController extends Controller
             return APIHelper::response(500, $validator->errors());
         }
 
-        $company = Company::where('id', $inputs['id'])->first();
+        $company = $this->companyModel->where('id', $inputs['id'])->first();
 
         return APIHelper::response(200, ['OK'], ['company' => $company]);
     }
@@ -45,7 +52,7 @@ class CompanyController extends Controller
 
         DB::beginTransaction();
         try {
-            $company = Company::create($inputs);
+            $company = $this->companyModel->create($inputs);
             DB::commit();
         } catch(\Exception $e) {
             DB::rollback();
@@ -65,7 +72,7 @@ class CompanyController extends Controller
             return APIHelper::reponse(500, ['Not id specified']);
         }
 
-        $company = Company::find($id);
+        $company = $this->companyModel->find($id);
 
         if ($company) {
             DB::beginTransaction();
