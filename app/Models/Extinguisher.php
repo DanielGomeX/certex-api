@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\ExtinguishersTypes;
 
 class Extinguisher extends Model
 {
@@ -19,4 +20,22 @@ class Extinguisher extends Model
         'extinguishers_status_id',
         'companies_id',
     ];
+
+    public function extinguishersTypes()
+    {
+        return $this->belongsToMany(ExtinguishersTypes::class, 'extinguishers_has_extinguishers_types', 'extinguishers_id', 'extinguishers_types_id');
+    }
+
+    public function insertExtinguishersTypes($extinguisherId, $extinguishersTypes)
+    {
+        if (count($extinguishersTypes) > 0) {
+            foreach($extinguishersTypes as $extinguisherTypeId) {
+                ExtinguisherType::create([
+                    'extinguishers_id' => $extinguisherId,
+                    'extinguishers_types_id' => $extinguisherTypeId,
+                ]);
+            }
+        }
+    }
+
 }
