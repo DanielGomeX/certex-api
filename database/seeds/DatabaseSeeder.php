@@ -17,5 +17,8 @@ class DatabaseSeeder extends Seeder
         $this->call(AccessLevelsTableSeeder::class);
         $this->call(UsersTableSeeder::class);
         $this->call(ExtinguishersTypesTableSeeder::class);
+        $this->call(QuestionsTableSeeder::class);
+        $this->call(AlternativesTableSeeder::class);
+        $this->call(QuestionsAlternativesTableSeeder::class);
     }
 }

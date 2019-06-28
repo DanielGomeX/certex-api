@@ -8,8 +8,20 @@ use App\Models\ExtinguisherType;
 
 class ExtinguishersTypesController extends Controller
 {
-    public function index()
+    private $extinguisherTypeModel;
+
+    public function __construct(ExtinguisherType $extinguisherType)
     {
-        return APIHelper::response(200, ['OK'], ['extinguishersTypes' => ExtinguisherType::all()]);
+        $this->extinguisherTypeModel = $extinguisherType;
+    }
+
+    public function all()
+    {
+        return APIHelper::response(200, ['OK'], ['extinguishersTypes' => $this->extinguisherTypeModel->all()]);
+    }
+
+    public function count()
+    {
+        return APIHelper::response(200, ['OK'], ['count' => $this->extinguisherTypeModel->count()]);
     }
 }

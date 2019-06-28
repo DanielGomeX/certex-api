@@ -10,6 +10,13 @@ use Validator;
 
 class ManufacturersController extends Controller
 {
+    private $manufacturerModel;
+
+    public function __construct(Manufacturer $manufacturer)
+    {
+        $this->manufacturerModel = $manufacturer;
+    }
+
     public function index(Request $request, $skip, $take)
     {
         $inputs = $request->all();
@@ -18,11 +25,16 @@ class ManufacturersController extends Controller
             return APIHelper::response(500, ['The parameters ini and end is a valid numeric']);
         }
 
-        $manufacturers = Manufacturer::skip($skip)
+        $manufacturers = $this->manufacturerModel->skip($skip)
                                         ->take($take)
                                         ->get();
 
         return APIHelper::response(200, ['OK'], ['manufacturers' => $manufacturers]);
+    }
+
+    public function count()
+    {
+        return APIHelper::response(200, ['OK'], ['count' => $this->manufacturerModel->count()]);
     }
 
     public function show(Request $request, $id)
@@ -38,7 +50,7 @@ class ManufacturersController extends Controller
             return APIHelper::response(500, $validator->errors());
         }
 
-        $manufacturer = Manufacturer::where('id', $inputs['id'])->first();
+        $manufacturer = $this->manufacturerModel->where('id', $inputs['id'])->first();
 
         return APIHelper::response(200, ['OK'], ['manufacturer' => $manufacturer]);
     }
@@ -60,7 +72,7 @@ class ManufacturersController extends Controller
 
         DB::beginTransaction();
         try {
-            $manufacturer = Manufacturer::create($inputs);
+            $manufacturer = $this->manufacturerModel->create($inputs);
             DB::commit();
         } catch(\Exception $e) {
             DB::rollback();
@@ -80,7 +92,7 @@ class ManufacturersController extends Controller
             return APIHelper::reponse(500, ['Not id specified']);
         }
 
-        $manufacturer = Manufacturer::find($id);
+        $manufacturer = $this->manufacturerModel->find($id);
 
         if ($manufacturer) {
             DB::beginTransaction();
@@ -102,7 +114,7 @@ class ManufacturersController extends Controller
             return APIHelper::reponse(500, ['Not id specified']);
         }
 
-        $manufacturer = Manufacturer::find($id);
+        $manufacturer = $this->manufacturerModel->find($id);
 
         if ($manufacturer->extinguishers()->count() > 0) {
             return APIHelper::reponse(500, ["Manufacturer id {$id} has many extinguishers related"]);
