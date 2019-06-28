@@ -32,6 +32,11 @@ class ManufacturersController extends Controller
         return APIHelper::response(200, ['OK'], ['manufacturers' => $manufacturers]);
     }
 
+    public function count()
+    {
+        return APIHelper::response(200, ['OK'], ['count' => $this->manufacturerModel->count()]);
+    }
+
     public function show(Request $request, $id)
     {
         $inputs = $request->all();

@@ -15,8 +15,13 @@ class ExtinguishersTypesController extends Controller
         $this->extinguisherTypeModel = $extinguisherType;
     }
 
-    public function index()
+    public function all()
     {
         return APIHelper::response(200, ['OK'], ['extinguishersTypes' => $this->extinguisherTypeModel->all()]);
+    }
+
+    public function count()
+    {
+        return APIHelper::response(200, ['OK'], ['count' => $this->extinguisherTypeModel->count()]);
     }
 }
