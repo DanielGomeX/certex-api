@@ -24,8 +24,8 @@ class CreateCompaniesTable extends Migration
             $table->string('complement', 45)->nullable();
             $table->string('neighborhood', 45)->nullable();
             $table->text('signature')->nullable();
-            $table->unsignedInteger('cities_id');
-            $table->foreign('cities_id')->references('id')->on('cities');
+            $table->string('state', 200)->nullable();
+            $table->string('city', 200)->nullable();
             $table->timestamps();
         });
     }

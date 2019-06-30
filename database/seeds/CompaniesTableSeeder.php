@@ -20,7 +20,9 @@ class CompaniesTableSeeder extends Seeder
                 'state_registration' => '00000000',
                 'social_name' => 'Certex',
                 'fantasy_name' => 'Certex',
-                'cities_id' => 1,
+                'state' => 'Rio Grande do Sul',
+                'city' => 'Lajeado',
+                'cep'  => 95950186
             ]
         ]);
 

@@ -12,7 +12,9 @@ class Manufacturer extends Model
         'fone',
         'email',
         'description',
-        'cities_id'
+        'state',
+        'city',
+        'cep',
     ];
 
     public function extinguishers()

@@ -19,8 +19,9 @@ class CreateManufacturersTable extends Migration
             $table->string('fone', 50);
             $table->string('email', 50)->unique();
             $table->string('description', 45)->nullable();
-            $table->unsignedInteger('cities_id');
-            $table->foreign('cities_id')->references('id')->on('cities');
+            $table->string('state', 200)->nullable();
+            $table->string('city', 200)->nullable();
+            $table->integer('cep')->nullable();
             $table->timestamps();
         });
     }

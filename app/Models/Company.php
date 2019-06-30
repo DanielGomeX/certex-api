@@ -17,7 +17,8 @@ class Company extends Model
         'complement',
         'neighborhood',
         'signature',
-        'cities_id'
+        'state',
+        'city',
     ];
 
     public function users()
