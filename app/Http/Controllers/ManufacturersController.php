@@ -62,8 +62,7 @@ class ManufacturersController extends Controller
         $validator = Validator::make($inputs, [
             'name' => 'required',
             'fone' => 'required',
-            'email' => 'required|email', //Unique
-            'cities_id' => 'required|numeric',
+            'email' => 'required|email',
         ]);
 
         if ($validator->fails()) {

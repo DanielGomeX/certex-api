@@ -42,7 +42,6 @@ class CompanyController extends Controller
         $validator = Validator::make($inputs, [
             'cnpj' => 'required',
             'state_registration' => 'required',
-            'cities_id' => 'required|numeric',
             'social_name' => 'required|min:3'
         ]);
 
