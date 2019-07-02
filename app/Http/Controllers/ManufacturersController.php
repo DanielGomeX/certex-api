@@ -25,16 +25,21 @@ class ManufacturersController extends Controller
             return APIHelper::response(500, ['The parameters ini and end is a valid numeric']);
         }
 
-        $manufacturers = $this->manufacturerModel->skip($skip)
+        $manufacturer = $this->manufacturerModel->skip($skip)
                                         ->take($take)
                                         ->get();
 
-        return APIHelper::response(200, ['OK'], ['manufacturers' => $manufacturers]);
+        return APIHelper::response(200, ['OK'], ['manufacturer' => $manufacturer]);
     }
 
     public function count()
     {
         return APIHelper::response(200, ['OK'], ['count' => $this->manufacturerModel->count()]);
+    }
+
+    public function all()
+    {
+        return APIHelper::response(200, ['OK'], ['manufacturers' => $this->manufacturerModel->all()]);
     }
 
     public function show(Request $request, $id)
