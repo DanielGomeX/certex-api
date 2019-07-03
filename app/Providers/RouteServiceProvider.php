@@ -80,6 +80,7 @@ class RouteServiceProvider extends ServiceProvider
             require base_path('routes/manufacturer.php');
             require base_path('routes/extinguisher.php');
             require base_path('routes/extinguisherType.php');
+            require base_path('routes/question.php');
         });
     }
 }
