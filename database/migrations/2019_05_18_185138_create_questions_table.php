@@ -17,7 +17,6 @@ class CreateQuestionsTable extends Migration
             $table->bigIncrements('id');
             $table->text('question');
             $table->tinyInteger('active');
-            $table->timestamps();
         });
     }
 

@@ -16,7 +16,6 @@ class CreateResponsibilitiesTable extends Migration
         Schema::create('responsibilities', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name', 45);
-            $table->timestamps();
         });
     }
 

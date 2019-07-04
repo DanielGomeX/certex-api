@@ -26,7 +26,6 @@ class CreateAnswersTable extends Migration
             $table->foreign('questions_id')->references('id')->on('questions');
             $table->foreign('extinguishers_id')->references('id')->on('extinguishers');
             $table->foreign('certifications_id')->references('id')->on('certifications');
-            $table->timestamps();
         });
     }
 

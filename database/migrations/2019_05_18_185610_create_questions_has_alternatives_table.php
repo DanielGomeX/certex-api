@@ -19,7 +19,6 @@ class CreateQuestionsHasAlternativesTable extends Migration
             $table->unsignedInteger('alternatives_id');
             $table->foreign('questions_id')->references('id')->on('questions');
             $table->foreign('alternatives_id')->references('id')->on('alternatives');
-            $table->timestamps();
         });
     }
 

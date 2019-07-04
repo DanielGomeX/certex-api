@@ -22,7 +22,6 @@ class CreateManufacturersTable extends Migration
             $table->string('state', 200)->nullable();
             $table->string('city', 200)->nullable();
             $table->string('cep', 45)->nullable();
-            $table->timestamps();
         });
     }
 

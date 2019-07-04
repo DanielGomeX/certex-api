@@ -22,7 +22,6 @@ class CreateUsersTable extends Migration
             $table->unsignedInteger('access_levels_id');
             $table->foreign('companies_id')->references('id')->on('companies');
             $table->foreign('access_levels_id')->references('id')->on('access_levels');
-            $table->timestamps();
         });
     }
 
