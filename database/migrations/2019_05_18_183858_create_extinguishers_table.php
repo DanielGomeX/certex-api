@@ -26,7 +26,6 @@ class CreateExtinguishersTable extends Migration
             $table->unsignedInteger('companies_id');
             $table->foreign('manufacturers_id')->references('id')->on('manufacturers');
             $table->foreign('companies_id')->references('id')->on('companies');
-            $table->timestamps();
         });
     }
 

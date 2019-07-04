@@ -19,7 +19,6 @@ class CreateCertificationsTable extends Migration
             $table->text('signature');
             $table->unsignedInteger('users_id');
             $table->foreign('users_id')->references('id')->on('users');
-            $table->timestamps();
         });
     }
 

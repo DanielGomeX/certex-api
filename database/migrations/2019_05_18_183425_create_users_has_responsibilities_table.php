@@ -19,7 +19,6 @@ class CreateUsersHasResponsibilitiesTable extends Migration
             $table->unsignedInteger('responsibilities_id');
             $table->foreign('users_id')->references('id')->on('users');
             $table->foreign('responsibilities_id')->references('id')->on('responsibilities');
-            $table->timestamps();
         });
     }
 

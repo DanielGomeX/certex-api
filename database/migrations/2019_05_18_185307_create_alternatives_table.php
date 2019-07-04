@@ -17,7 +17,6 @@ class CreateAlternativesTable extends Migration
             $table->bigIncrements('id');
             $table->text('alternative');
             $table->tinyInteger('active');
-            $table->timestamps();
         });
     }
 

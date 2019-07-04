@@ -19,7 +19,6 @@ class CreateExtinguishersHasExtinguishersTypesTable extends Migration
             $table->unsignedInteger('extinguishers_id');
             $table->foreign('extinguishers_types_id')->references('id')->on('extinguishers_types');
             $table->foreign('extinguishers_id')->references('id')->on('extinguishers');
-            $table->timestamps();
         });
     }
 

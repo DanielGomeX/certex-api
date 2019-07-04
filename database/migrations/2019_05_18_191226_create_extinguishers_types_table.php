@@ -16,7 +16,6 @@ class CreateExtinguishersTypesTable extends Migration
         Schema::create('extinguishers_types', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('description', 100);
-            $table->timestamps();
         });
     }
 
