@@ -8,6 +8,7 @@ use App\Models\ExtinguisherExtinguisherType;
 
 class Extinguisher extends Model
 {
+    public $timestamps = false;
     protected $table = 'extinguishers';
     protected $fillable = [
         'code',

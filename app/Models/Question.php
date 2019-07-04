@@ -7,6 +7,7 @@ use App\Models\Alternative;
 
 class Question extends Model
 {
+    public $timestamps = false;
     protected $table = 'questions';
     protected $fillable = [
         'question',
