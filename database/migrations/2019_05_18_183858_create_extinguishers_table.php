@@ -19,8 +19,6 @@ class CreateExtinguishersTable extends Migration
             $table->string('numeration', 50)->nullable();
             $table->string('capacity', 50)->nullable();
             $table->string('charge', 50)->nullable();
-            $table->datetime('charge_date')->nullable();
-            $table->datetime('validate_date')->nullable();
             $table->text('location')->nullable();
             $table->unsignedInteger('manufacturers_id');
             $table->unsignedInteger('companies_id');

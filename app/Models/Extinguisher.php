@@ -14,8 +14,6 @@ class Extinguisher extends Model
         'numeration',
         'capacity',
         'charge',
-        'charge_date',
-        'validate_date',
         'location',
         'manufacturers_id',
         'extinguishers_status_id',
