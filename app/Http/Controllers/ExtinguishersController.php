@@ -57,6 +57,11 @@ class ExtinguishersController extends Controller
         return APIHelper::response(200, ['OK'], ['extinguisher' => $extinguisher]);
     }
 
+    public function all()
+    {
+        return APIHelper::response(200, ['OK'], ['extinguishers' => $this->extinguisherModel->all()]);
+    }
+
     public function store(Request $request)
     {
         $inputs = $request->except('token');
