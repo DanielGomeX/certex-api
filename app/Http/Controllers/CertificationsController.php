@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Certification;
+use App\Models\Extinguisher;
+use App\Models\Answer;
 use App\Helpers\APIHelper;
 use Validator;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -12,11 +14,16 @@ use Illuminate\Support\Facades\Storage;
 
 class CertificationsController extends Controller
 {
-    private $certificationModel;
+    private $certificationModel, $extinguisherModel, $answerModel;
 
-    public function __construct(Certification $certification)
-    {
+    public function __construct(
+        Certification $certification,
+        Extinguisher $extinguisher,
+        Answer $answer
+    ) {
         $this->certificationModel = $certification;
+        $this->extinguisherModel = $extinguisher;
+        $this->answerModel = $answer;
     }
 
     public function count()
@@ -110,11 +117,27 @@ class CertificationsController extends Controller
         return APIHelper::response(200, ['OK']);
     }
 
-    public function generate()
+    public function generate($certificationId, $extinguisherId)
     {
+        $extinguisher = $this->extinguisherModel->find($extinguisherId);
+        $certification = $this->certificationModel->find($certificationId);
+
+        $answers = $this->answerModel->with(['question', 'alternative'])
+                                    ->where('extinguishers_id', $extinguisherId)
+                                    ->where('certifications_id', $certificationId)
+                                    ->get();
+
+        // ID do user?
+
+        $data = [
+            'answers' => $answers,
+            'certification' => $certification,
+            'extinguisher' => $extinguisher
+        ];
+
         $filename = date('YmdHis').'_certification.pdf';
         $path = public_path('pdf/'.$filename);
-        $pdf = PDF::loadView('certification');
+        $pdf = PDF::loadView('certification', compact('data'));
         $pdf->save($path);
         return url('pdf/'.$filename);
     }

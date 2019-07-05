@@ -20,5 +20,9 @@ class DatabaseSeeder extends Seeder
         $this->call(QuestionsTableSeeder::class);
         $this->call(AlternativesTableSeeder::class);
         $this->call(QuestionsAlternativesTableSeeder::class);
+        $this->call(ManufacturersTableSeeder::class);
+        $this->call(ExtinguishersTableSeeder::class);
+        $this->call(CertificationsTableSeeder::class);
+        $this->call(AnswersTableSeeder::class);
     }
 }

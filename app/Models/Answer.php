@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Question;
 
 class Answer extends Model
 {
@@ -17,4 +18,14 @@ class Answer extends Model
         'certifications_id',
         'questions_id',
     ];
+
+    public function question()
+    {
+        return $this->belongsTo(Question::class, 'questions_id', 'id');
+    }
+
+    public function alternative()
+    {
+        return $this->belongsTo(Alternative::class, 'alternatives_id', 'id');
+    }
 }

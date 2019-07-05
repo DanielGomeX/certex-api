@@ -13,6 +13,7 @@ class Certification extends Model
         'report_code',
         'signature',
         'users_id',
+        'date',
     ];
 
     public function answers()

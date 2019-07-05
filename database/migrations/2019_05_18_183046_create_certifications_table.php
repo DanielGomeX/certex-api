@@ -18,6 +18,7 @@ class CreateCertificationsTable extends Migration
             $table->string('report_code', 45);
             $table->text('signature');
             $table->unsignedInteger('users_id');
+            $table->string('date', 100);
             $table->foreign('users_id')->references('id')->on('users');
         });
     }
