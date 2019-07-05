@@ -17,22 +17,9 @@ class CertificationsController extends Controller
         $this->certificationModel = $certification;
     }
 
-    public function show(Request $request, $id)
+    public function all()
     {
-        $inputs = $request->all();
-        $inputs = ['id' => $id];
-
-        $validator = Validator::make($inputs, [
-            'id' => 'required|numeric',
-        ]);
-
-        if ($validator->fails()) {
-            return APIHelper::response(500, $validator->errors());
-        }
-
-        $company = $this->companyModel->where('id', $inputs['id'])->first();
-
-        return APIHelper::response(200, ['OK'], ['company' => $company]);
+        return APIHelper::response(200, ['OK'], ['certifications' => $this->certificationModel->all()]);
     }
 
     public function store(Request $request)
@@ -99,14 +86,12 @@ class CertificationsController extends Controller
             return APIHelper::reponse(500, ['Not id specified']);
         }
 
-        $certification = $this->certificationModel->find($id);
+        $certification = $this->certificationModel->load('answers')->find($id);
 
         if ($certification) {
             DB::beginTransaction();
             try {
-
-                //Delete answers
-
+                $extinguisher->answers()->delete();
                 $certification->delete();
                 DB::commit();
             } catch(\Exception $e) {

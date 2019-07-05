@@ -81,6 +81,7 @@ class RouteServiceProvider extends ServiceProvider
             require base_path('routes/extinguisher.php');
             require base_path('routes/extinguisherType.php');
             require base_path('routes/question.php');
+            require base_path('routes/certification.php');
         });
     }
 }
