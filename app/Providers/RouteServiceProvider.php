@@ -72,10 +72,11 @@ class RouteServiceProvider extends ServiceProvider
 
         Route::group(['prefix' => 'api', 'namespace' => $this->namespace], function($router) {
             require base_path('routes/login.php');
+            require base_path('routes/api.php');
+            require base_path('routes/companyStore.php');
         });
 
         Route::group(['middleware' => ['auth:api'], 'prefix' => 'api', 'namespace' => $this->namespace], function($router) {
-            require base_path('routes/api.php');
             require base_path('routes/company.php');
             require base_path('routes/manufacturer.php');
             require base_path('routes/extinguisher.php');
