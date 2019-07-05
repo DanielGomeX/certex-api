@@ -6,7 +6,7 @@ use function bcrypt;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 use App\Helpers\APIHelper;
 
 class UsersController extends Controller
