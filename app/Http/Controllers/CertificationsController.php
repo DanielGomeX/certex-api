@@ -17,6 +17,11 @@ class CertificationsController extends Controller
         $this->certificationModel = $certification;
     }
 
+    public function count()
+    {
+        return APIHelper::response(200, ['OK'], ['count' => $this->certificationModel->count()]);
+    }
+
     public function all()
     {
         return APIHelper::response(200, ['OK'], ['certifications' => $this->certificationModel->all()]);
