@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use function bcrypt;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
@@ -49,6 +50,8 @@ class UsersController extends Controller
         if ($validator->fails()) {
             return APIHelper::response(500, $validator->errors());
         }
+
+        $inputs['password'] = bcrypt($inputs['password']);
 
         DB::beginTransaction();
         try {
