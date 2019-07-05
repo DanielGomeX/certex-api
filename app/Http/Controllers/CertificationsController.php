@@ -36,6 +36,24 @@ class CertificationsController extends Controller
         return APIHelper::response(200, ['OK'], ['certifications' => $this->certificationModel->all()]);
     }
 
+    public function show(Request $request, $id)
+    {
+        $inputs = $request->all();
+        $inputs = ['id' => $id];
+
+        $validator = Validator::make($inputs, [
+            'id' => 'required|numeric',
+        ]);
+
+        if ($validator->fails()) {
+            return APIHelper::response(500, $validator->errors());
+        }
+
+        $certification = $this->certificationModel->where('id', $inputs['id'])->first();
+
+        return APIHelper::response(200, ['OK'], ['certification' => $certification]);
+    }
+
     public function store(Request $request)
     {
         $inputs = $request->except('token');
@@ -105,7 +123,6 @@ class CertificationsController extends Controller
         if ($certification) {
             DB::beginTransaction();
             try {
-                $extinguisher->answers()->delete();
                 $certification->delete();
                 DB::commit();
             } catch(\Exception $e) {
@@ -132,7 +149,8 @@ class CertificationsController extends Controller
         $data = [
             'answers' => $answers,
             'certification' => $certification,
-            'extinguisher' => $extinguisher
+            'extinguisher' => $extinguisher,
+            'user'         => ''
         ];
 
         $filename = date('YmdHis').'_certification.pdf';
