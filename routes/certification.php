@@ -7,5 +7,5 @@ Route::group(['prefix' => 'certification', 'name' => 'certification.'], function
     Route::post('{id}/update', 'CertificationsController@update')->name('update');
     Route::get('{id}/destroy', 'CertificationsController@destroy')->name('destroy');
     // Route::get('{id}/show', 'CertificationsController@show')->name('show');
-    // Route::get('index', 'CertificationsController@index')->name('index');
+    Route::get('generate', 'CertificationsController@generate')->name('generate');
 });

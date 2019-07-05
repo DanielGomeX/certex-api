@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Certification;
 use App\Helpers\APIHelper;
 use Validator;
+use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Facades\Storage;
 
 class CertificationsController extends Controller
 {
@@ -106,5 +108,14 @@ class CertificationsController extends Controller
         }
 
         return APIHelper::response(200, ['OK']);
+    }
+
+    public function generate()
+    {
+        $filename = date('YmdHis').'_certification.pdf';
+        $path = public_path('pdf/'.$filename);
+        $pdf = PDF::loadView('certification');
+        $pdf->save($path);
+        return url('pdf/'.$filename);
     }
 }
