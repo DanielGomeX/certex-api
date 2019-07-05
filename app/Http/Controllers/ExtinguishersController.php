@@ -51,7 +51,7 @@ class ExtinguishersController extends Controller
             return APIHelper::response(500, $validator->errors());
         }
 
-        $extinguisher = $this->extinguisherModel->with('extinguishersTypes')
+        $extinguisher = $this->extinguisherModel->with('extinguishersExtinguishersTypes')
                                     ->where('id', $inputs['id'])->first();
 
         return APIHelper::response(200, ['OK'], ['extinguisher' => $extinguisher]);
