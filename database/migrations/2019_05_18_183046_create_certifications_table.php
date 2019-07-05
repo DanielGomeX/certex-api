@@ -20,6 +20,7 @@ class CreateCertificationsTable extends Migration
             $table->unsignedInteger('users_id');
             $table->string('date', 100);
             $table->foreign('users_id')->references('id')->on('users');
+            $table->string('extinguishers_id', 45)->nullable();
         });
     }
 

@@ -12,8 +12,9 @@ class Certification extends Model
     protected $fillable = [
         'report_code',
         'signature',
-        'users_id',
         'date',
+        'users_id',
+        'extinguishers_id',
     ];
 
     public function answers()
